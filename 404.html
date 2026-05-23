@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 Not Found | Wrench & Gear</title>
+    
+    <!-- Tailwind CSS and Global Links -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <script>
+        tailwind.config = {
+            theme: { extend: { fontFamily: { sans: ['Outfit', 'sans-serif'] }, colors: { brand: { 900: '#0f172a', 600: '#4f46e5', 500: '#6366f1' } } } }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen">
+    
+    <div id="toast-container"></div>
+
+    <main class="flex-grow flex items-center justify-center text-center py-20">
+        <div class="max-w-md">
+            <i class="fa-solid fa-car-crash text-9xl text-red-500 opacity-70 mb-8"></i>
+            <h1 class="text-6xl font-extrabold text-slate-900 mb-4">404</h1>
+            <h2 class="text-3xl font-bold text-slate-800 mb-6">Service Bay Not Found!</h2>
+            <p class="text-lg text-slate-600 mb-10">
+                Oops! Looks like the page you were looking for took a wrong turn. Let's get you back on the road.
+            </p>
+            <a href="index.html" class="bg-brand-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-brand-700 transition shadow-lg transform hover:-translate-y-0.5">
+                <i class="fa-solid fa-house mr-2"></i> Return to Homepage
+            </a>
+        </div>
+    </main>
+
+    <!-- Placeholder for Footer -->
+    <footer class="bg-brand-900 text-white pt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="pt-8 text-center text-gray-500 text-sm">
+                &copy; 2023 Wrench & Gear Auto Services. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Global JavaScript Logic -->
+    <script src="js/main.js"></script>
+</body>
+</html>

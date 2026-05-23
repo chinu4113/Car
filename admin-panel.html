@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Wrench & Gear</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <script>
+        tailwind.config = {
+            theme: { extend: { fontFamily: { sans: ['Outfit', 'sans-serif'] }, colors: { brand: { 900: '#0f172a', 600: '#4f46e5', 500: '#6366f1' } } } }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen">
+    
+    <div id="toast-container"></div>
+
+    <header class="bg-brand-900 text-white border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
+            <h1 class="text-xl font-bold flex items-center gap-3">
+                <i class="fa-solid fa-gear text-red-500 text-2xl"></i>
+                Service Management Panel
+            </h1>
+            <button id="admin-logout-btn" class="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg text-sm transition">
+                <i class="fa-solid fa-right-from-bracket mr-2"></i> Log Out
+            </button>
+        </div>
+    </header>
+
+    <main class="flex-grow py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-slate-900 mb-8">Today's Workflow Overview</h2>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-12">
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <p class="text-sm font-medium text-slate-500">Active Jobs</p>
+                        <p class="text-3xl font-bold text-brand-900 mt-1">4</p>
+                    </div>
+                    <i class="fa-solid fa-car-wrench text-3xl text-brand-400"></i>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <p class="text-sm font-medium text-slate-500">Upcoming Appts</p>
+                        <p class="text-3xl font-bold text-brand-900 mt-1">2</p>
+                    </div>
+                    <i class="fa-solid fa-calendar-alt text-3xl text-green-400"></i>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <p class="text-sm font-medium text-slate-500">Awaiting Approval</p>
+                        <p class="text-3xl font-bold text-brand-900 mt-1">1</p>
+                    </div>
+                    <i class="fa-solid fa-clock text-3xl text-orange-400"></i>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-slate-200 flex justify-between items-center">
+                    <div>
+                        <p class="text-sm font-medium text-slate-500">Revenue (Mo.)</p>
+                        <p class="text-3xl font-bold text-brand-900 mt-1">$15,200</p>
+                    </div>
+                    <i class="fa-solid fa-dollar-sign text-3xl text-purple-400"></i>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Col 1 & 2: Active Job Table -->
+                <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
+                    <div class="p-6 border-b">
+                        <h3 class="text-xl font-bold text-slate-900">Current Shop Schedule</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-slate-200">
+                            <thead class="bg-slate-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Job ID</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Vehicle</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Service</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="schedule-body" class="bg-white divide-y divide-slate-200">
+                                <!-- Data loaded by js/admin.js -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Col 3: Upcoming Appointments -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-6">
+                        <h3 class="text-xl font-bold text-slate-900 mb-4">New Appointment Requests</h3>
+                        <ul id="appointment-body" class="divide-y divide-slate-100 -mx-4 px-4">
+                             <!-- Data loaded by js/admin.js -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Placeholder for Footer -->
+    <footer class="bg-brand-900 text-white pt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="pt-8 text-center text-gray-500 text-sm">
+                &copy; 2023 Wrench & Gear Auto Services. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/utils/db-config.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

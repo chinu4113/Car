@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard – CarCare</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    .fade-in {
+      animation: fade .6s ease-in-out;
+    }
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body class="bg-gray-100">
+
+  <!-- Background -->
+  <div class="min-h-screen bg-cover bg-center p-6"
+    style="background-image: url('https://images.unsplash.com/photo-1570129476815-ba368ac77013?auto=format&fit=crop&w=1500&q=80');">
+
+    <!-- Header -->
+    <div class="flex justify-between items-center bg-white/90 backdrop-blur-sm p-4 rounded-xl shadow-md">
+      <div class="flex items-center gap-3">
+        <img src="https://png.pngtree.com/png-clipart/20200727/original/pngtree-modern-car-repair-logo-design-png-image_5366858.jpg"
+             class="h-12 rounded" alt="Logo">
+        <h1 class="text-2xl font-bold text-blue-700">CarCare Dashboard</h1>
+      </div>
+
+      <button onclick="logoutUser()"
+        class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+        Logout
+      </button>
+    </div>
+
+    <!-- Dashboard container -->
+    <div class="max-w-4xl mx-auto mt-10 fade-in">
+
+      <!-- Welcome Section -->
+      <div class="bg-white shadow-xl rounded-xl p-6 mb-6 backdrop-blur-sm bg-white/95">
+        <h2 class="text-xl font-bold text-gray-800">Welcome, <span id="username">User</span> 👋</h2>
+        <p class="text-gray-600 mt-1">Here is your latest activity and service history.</p>
+      </div>
+
+      <!-- Booking History -->
+      <div class="bg-white shadow-xl rounded-xl p-6 backdrop-blur-sm bg-white/95">
+        <h3 class="text-lg font-semibold text-gray-800 mb-4">Your Recent Bookings</h3>
+
+        <div id="bookingList" class="space-y-4">
+          <!-- JS will load bookings here -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+  <script src="js/auth.js"></script>
+
+</body>
+</html>

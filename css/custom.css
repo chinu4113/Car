@@ -1,0 +1,103 @@
+/*
+    Custom Stylesheet for Wrench & Gear Auto Services
+*/
+
+/* --- 1. Global Settings --- */
+:root {
+    /* Define default to prevent "undefined variable" errors in editor */
+    --progress-width: 0%;
+}
+
+html {
+    /* 'scroll-behavior' works best on html in modern browsers */
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    /* Tailwind sets a default background, but we ensure it here */
+    background-color: #f8fafc; 
+}
+
+/* --- 2. Custom Scrollbar (Webkit Browsers) --- */
+/* Note: Editors may show "Unknown pseudo-element" warnings here. This is normal. */
+::-webkit-scrollbar { 
+    width: 8px; 
+}
+::-webkit-scrollbar-track { 
+    background: #f1f1f1; 
+}
+::-webkit-scrollbar-thumb { 
+    background: #4f46e5; 
+    border-radius: 4px; 
+}
+::-webkit-scrollbar-thumb:hover { 
+    background: #4338ca; 
+}
+
+/* --- 3. Toast Notifications --- */
+#toast-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+.toast {
+    background: white;
+    border-left: 4px solid #4f46e5; 
+    padding: 16px 24px;
+    border-radius: 8px;
+    /* Detailed shadow for depth */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    margin-top: 10px;
+    /* Start off-screen to the right */
+    transform: translateX(100%); 
+    transition: transform 0.3s ease-out;
+    display: flex;
+    align-items: center;
+    min-width: 300px;
+}
+
+.toast.show { 
+    /* Slide in */
+    transform: translateX(0); 
+}
+
+/* --- 4. Mobile Menu Transitions --- */
+#mobile-menu {
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+}
+
+#mobile-menu.open {
+    max-height: 500px; /* Arbitrary large height to allow content to expand */
+    opacity: 1;
+}
+
+/* --- 5. Dashboard Progress Bar Animation --- */
+@keyframes fillProgress {
+    from { width: 0%; }
+    to { width: var(--progress-width); }
+}
+
+.progress-bar-fill {
+    animation: fillProgress 1.5s ease-out forwards;
+}
+
+/* --- 6. Optional: CSS-only Fade In Animation --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.animate-slide-up {
+    animation: fadeIn 1s ease-out 0.2s forwards; /* 0.2s delay */
+    opacity: 0; /* Start invisible */
+}

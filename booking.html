@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Service | Wrench & Gear</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <script>
+        tailwind.config = {
+            theme: { extend: { fontFamily: { sans: ['Outfit', 'sans-serif'] }, colors: { brand: { 900: '#0f172a', 600: '#4f46e5', 500: '#6366f1' } } } }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen">
+    
+    <div id="toast-container"></div>
+
+    <!-- NOTE: Header replicated for structure -->
+    <header>
+        <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-20 items-center">
+                    <a href="index.html" class="flex items-center gap-3">
+                        <div class="bg-brand-600 text-white p-2 rounded-lg"><i class="fa-solid fa-wrench text-xl"></i></div>
+                        <span class="font-bold text-xl tracking-tight text-slate-900">Wrench & Gear</span>
+                    </a>
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="index.html" class="text-slate-600 hover:text-brand-600 font-medium transition">Home</a>
+                        <a href="services.html" class="text-slate-600 hover:text-brand-600 font-medium transition">Services</a>
+                        <a href="contact.html" class="text-slate-600 hover:text-brand-600 font-medium transition">Contact</a>
+                        <div id="nav-guest" class="flex items-center space-x-4">
+                            <div class="relative" id="login-dropdown">
+                                <button class="text-slate-600 hover:text-brand-600 font-medium transition flex items-center gap-2" type="button">
+                                    Login
+                                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                                </button>
+                                <div id="login-menu" class="hidden absolute right-0 mt-2 w-40 bg-white border border-slate-200 rounded-lg shadow-lg">
+                                    <a href="login.html" class="block px-4 py-2 text-slate-700 hover:bg-slate-50">User Login</a>
+                                    <a href="admin-login.html" class="block px-4 py-2 text-slate-700 hover:bg-slate-50">Admin Login</a>
+                                </div>
+                            </div>
+                            <a href="booking.html" class="bg-brand-900 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-slate-800 transition">Book Service</a>
+                        </div>
+                        <div id="nav-user" class="hidden items-center space-x-6">
+                            <a href="dashboard.html" class="flex items-center text-slate-700 hover:text-brand-600 font-medium">
+                                <img id="user-avatar" src="https://placehold.co/32x32/6366f1/ffffff?text=U" class="w-8 h-8 rounded-full mr-2">Dashboard
+                            </a>
+                            <button onclick="app.logout()" class="text-slate-400 hover:text-red-500 transition" title="Logout"><i class="fa-solid fa-right-from-bracket text-lg"></i></button>
+                        </div>
+                    </div>
+                    <button id="mobile-menu-button" class="md:hidden text-slate-600 focus:outline-none text-2xl"><i class="fa-solid fa-bars"></i></button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden"></div>
+        </nav>
+    </header>
+
+    <main class="flex-grow py-16">
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-slate-100">
+                <div class="bg-brand-900 px-8 py-6">
+                    <h1 class="text-2xl font-bold text-white">Schedule Your Service</h1>
+                    <p class="text-brand-200 text-sm mt-1">Book your appointment in three simple steps.</p>
+                </div>
+                
+                <form id="bookingForm" onsubmit="app.handleBooking(event)" class="p-8 space-y-8">
+                    
+                    <!-- Step Indicator -->
+                    <div class="flex items-center justify-between mb-4 text-sm font-medium text-slate-500">
+                        <span class="text-brand-600 flex items-center"><span class="w-6 h-6 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center mr-2 text-xs font-bold">1</span> Vehicle Info</span>
+                        <div class="flex-1 h-px bg-slate-200 mx-4"></div>
+                        <span class="text-brand-600 flex items-center"><span class="w-6 h-6 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center mr-2 text-xs font-bold">2</span> Service Type</span>
+                        <div class="flex-1 h-px bg-slate-200 mx-4"></div>
+                        <span class="text-brand-600 flex items-center"><span class="w-6 h-6 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center mr-2 text-xs font-bold">3</span> Time Slot</span>
+                    </div>
+
+                    <!-- Step 1: Vehicle Info -->
+                    <div class="space-y-6 border-b pb-8">
+                        <h2 class="text-xl font-bold text-slate-800">1. Vehicle Information</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Car Make</label>
+                                <select id="car-make" required class="w-full rounded-lg border-slate-300 border p-3 text-slate-700 focus:ring-2 focus:ring-brand-500 outline-none transition">
+                                    <option value="">Select Make</option>
+                                    <option>Toyota</option>
+                                    <option>Honda</option>
+                                    <option>Ford</option>
+                                    <option>BMW</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Car Model</label>
+                                <input id="car-model" required type="text" placeholder="e.g. Civic, F-150" class="w-full rounded-lg border-slate-300 border p-3 focus:ring-2 focus:ring-brand-500 outline-none transition">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-slate-700 mb-2">VIN (Optional, helps us prepare)</label>
+                                <input type="text" placeholder="Vehicle Identification Number" class="w-full rounded-lg border-slate-300 border p-3 focus:ring-2 focus:ring-brand-500 outline-none transition">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Service Selection -->
+                    <div class="space-y-6 border-b pb-8">
+                        <h2 class="text-xl font-bold text-slate-800">2. Select Service Type</h2>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <label class="cursor-pointer border rounded-xl p-4 hover:bg-slate-50 flex flex-col items-center text-center gap-2 transition has-[:checked]:border-brand-500 has-[:checked]:bg-brand-50">
+                                <input type="radio" name="service" value="Oil Change" class="hidden" checked>
+                                <i class="fa-solid fa-oil-can text-slate-500 text-2xl"></i>
+                                <span class="text-sm font-medium">Oil Change</span>
+                            </label>
+                            <label class="cursor-pointer border rounded-xl p-4 hover:bg-slate-50 flex flex-col items-center text-center gap-2 transition has-[:checked]:border-brand-500 has-[:checked]:bg-brand-50">
+                                <input type="radio" name="service" value="Diagnostics" class="hidden">
+                                <i class="fa-solid fa-triangle-exclamation text-slate-500 text-2xl"></i>
+                                <span class="text-sm font-medium">Diagnostics</span>
+                            </label>
+                            <label class="cursor-pointer border rounded-xl p-4 hover:bg-slate-50 flex flex-col items-center text-center gap-2 transition has-[:checked]:border-brand-500 has-[:checked]:bg-brand-50">
+                                <input type="radio" name="service" value="Brake Repair" class="hidden">
+                                <i class="fa-solid fa-stop text-slate-500 text-2xl"></i>
+                                <span class="text-sm font-medium">Brake Repair</span>
+                            </label>
+                            <label class="cursor-pointer border rounded-xl p-4 hover:bg-slate-50 flex flex-col items-center text-center gap-2 transition has-[:checked]:border-brand-500 has-[:checked]:bg-brand-50">
+                                <input type="radio" name="service" value="Suspension" class="hidden">
+                                <i class="fa-solid fa-road text-slate-500 text-2xl"></i>
+                                <span class="text-sm font-medium">Suspension</span>
+                            </label>
+                        </div>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Description of Issue (Optional)</label>
+                        <textarea rows="3" placeholder="Describe the sound, light, or specific problem you are experiencing." class="w-full rounded-lg border-slate-300 border p-3 focus:ring-2 focus:ring-brand-500 outline-none transition"></textarea>
+                    </div>
+
+                    <!-- Step 3: Date & Contact -->
+                    <div class="space-y-6">
+                        <h2 class="text-xl font-bold text-slate-800">3. Select Time & Contact Info</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Preferred Date</label>
+                                <input id="preferred-date" required type="date" class="w-full rounded-lg border-slate-300 border p-3 focus:ring-2 focus:ring-brand-500 outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Preferred Time</label>
+                                <input id="preferred-time" required type="time" class="w-full rounded-lg border-slate-300 border p-3 focus:ring-2 focus:ring-brand-500 outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-slate-700 mb-2">Contact Phone</label>
+                                <input id="contact-phone" required type="tel" placeholder="(555) 123-4567" class="w-full rounded-lg border-slate-300 border p-3 focus:ring-2 focus:ring-brand-500 outline-none transition">
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full bg-brand-600 text-white font-bold py-4 rounded-lg hover:bg-brand-700 transition shadow-lg transform hover:-translate-y-0.5">
+                            Confirm Request
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Placeholder for Footer -->
+    <footer class="bg-brand-900 text-white pt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="pt-8 text-center text-gray-500 text-sm">
+                &copy; 2023 Wrench & Gear Auto Services. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/booking.js"></script>
+</body>
+</html>
+

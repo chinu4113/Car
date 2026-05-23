@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wrench & Gear | Premium Mechanical Services</title>
+    
+    <!-- Tailwind CSS (Styling Framework) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome (Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts: Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: { 
+                extend: { 
+                    fontFamily: { sans: ['Outfit', 'sans-serif'] }, 
+                    colors: { brand: { 900: '#0f172a', 600: '#4f46e5', 500: '#6366f1' } } 
+                } 
+            }
+        }
+    </script>
+    
+    <!-- Link to Custom CSS -->
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen">
+    
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+    
+    <!-- ================= NAVIGATION BAR ================= -->
+    <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                
+                <!-- Brand / Logo -->
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="bg-brand-600 text-white p-2 rounded-lg shadow-md">
+                        <i class="fa-solid fa-wrench text-xl"></i>
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-slate-900">Wrench & Gear</span>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-brand-600 font-bold transition">Home</a>
+                    <a href="services.html" class="text-slate-600 hover:text-brand-600 font-medium transition">Services</a>
+                    <a href="contact.html" class="text-slate-600 hover:text-brand-600 font-medium transition">Contact</a>
+                    
+                    <div id="nav-guest" class="flex items-center space-x-4">
+                        <div class="relative" id="login-dropdown">
+                            <button class="text-slate-600 hover:text-brand-600 font-medium transition flex items-center gap-2" type="button">
+                                Login
+                                <i class="fa-solid fa-chevron-down text-xs"></i>
+                            </button>
+                            <div id="login-menu" class="hidden absolute right-0 mt-2 w-40 bg-white border border-slate-200 rounded-lg shadow-lg">
+                                <a href="login.html" class="block px-4 py-2 text-slate-700 hover:bg-slate-50">User Login</a>
+                                <a href="admin-login.html" class="block px-4 py-2 text-slate-700 hover:bg-slate-50">Admin Login</a>
+                            </div>
+                        </div>
+                        <a href="booking.html" class="bg-brand-900 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-slate-800 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
+                            Book Service
+                        </a>
+                    </div>
+                    
+                    <div id="nav-user" class="hidden items-center space-x-6">
+                        <a href="dashboard.html" class="flex items-center text-slate-700 hover:text-brand-600 font-medium group">
+                            <img id="user-avatar" src="https://placehold.co/32x32/6366f1/ffffff?text=U" class="w-8 h-8 rounded-full mr-2 border border-slate-200 group-hover:border-brand-500 transition">
+                            Dashboard
+                        </a>
+                        <button onclick="app.logout()" class="text-slate-400 hover:text-red-500 transition" title="Logout">
+                            <i class="fa-solid fa-right-from-bracket text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-slate-600 focus:outline-none text-2xl p-2">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-100 absolute w-full shadow-xl">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html" class="block font-medium text-brand-600 bg-slate-50 px-3 py-2 rounded-lg">Home</a>
+                <a href="services.html" class="block font-medium text-slate-700 hover:text-brand-600 px-3 py-2">Services</a>
+                <a href="booking.html" class="block font-medium text-brand-600 px-3 py-2">Book Now</a>
+                <a href="login.html" class="block font-medium text-slate-700 px-3 py-2">User Login</a>
+                <a href="admin-login.html" class="block font-medium text-slate-700 px-3 py-2">Admin Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <main class="flex-grow">
+        
+        <!-- HERO SECTION -->
+        <section class="relative bg-brand-900 text-white overflow-hidden min-h-[600px] flex items-center">
+            <!-- Background Image with Overlay -->
+            <div class="absolute inset-0 opacity-40">
+                <img src="https://images.unsplash.com/photo-1598373305417-5735b5a04107?q=80&w=1920&auto=format&fit=crop" 
+                     onerror="this.onerror=null;this.src='https://placehold.co/1920x800/0f172a/ffffff?text=WRENCH+GEAR+HERO';"
+                     alt="Clean car repair shop" 
+                     class="w-full h-full object-cover animate-fade-in">
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-r from-brand-900 via-brand-900/80 to-transparent"></div>
+            
+            <!-- Hero Content -->
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-10">
+                <div class="max-w-2xl animate-slide-up">
+                    <div class="inline-flex items-center gap-2 bg-brand-600/20 border border-brand-500/30 rounded-full px-4 py-1 mb-6 backdrop-blur-sm">
+                        <span class="w-2 h-2 rounded-full bg-green-400"></span>
+                        <span class="text-brand-200 text-sm font-semibold tracking-wide uppercase">Open Today until 6:00 PM</span>
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-bold tracking-tight leading-tight mb-6">
+                        Mechanics You Can <br> <span class="text-brand-500">Actually Trust.</span>
+                    </h1>
+                    <p class="text-xl text-slate-300 mb-10 leading-relaxed max-w-lg">
+                        Full-service mechanical diagnostics, repairs, and maintenance. We combine old-school craftsmanship with modern technology.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="booking.html" class="bg-brand-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-brand-500 transition shadow-lg shadow-brand-900/50 transform hover:-translate-y-0.5 text-center">
+                            Schedule Repair
+                        </a>
+                        <a href="services.html" class="bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-4 rounded-lg font-bold text-lg hover:bg-white/20 transition text-center">
+                            View All Services
+                        </a>
+                    </div>
+                    
+                    <!-- Quick Stats -->
+                    <div class="mt-12 grid grid-cols-3 gap-8 border-t border-brand-800/50 pt-8">
+                        <div>
+                            <p class="text-3xl font-bold text-white">15+</p>
+                            <p class="text-sm text-slate-400">Years Exp.</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-white">5k+</p>
+                            <p class="text-sm text-slate-400">Cars Fixed</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-bold text-white">4.9</p>
+                            <p class="text-sm text-slate-400">Rating</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES GRID -->
+        <section class="bg-white border-b border-slate-100 py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Why Choose Wrench & Gear?</h2>
+                    <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">We treat every vehicle like it's our own, prioritizing safety and transparency.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="bg-slate-50 p-8 rounded-2xl shadow-sm hover:shadow-md transition border border-slate-100 group text-center">
+                        <div class="w-16 h-16 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition duration-300">
+                            <i class="fa-solid fa-file-invoice text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Transparent Pricing</h3>
+                        <p class="text-slate-600 leading-relaxed">Detailed digital quotes sent to your phone. No hidden fees, and we never proceed without your explicit approval.</p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="bg-slate-50 p-8 rounded-2xl shadow-sm hover:shadow-md transition border border-slate-100 group text-center">
+                        <div class="w-16 h-16 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition duration-300">
+                            <i class="fa-solid fa-certificate text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">ASE Certified Pros</h3>
+                        <p class="text-slate-600 leading-relaxed">Our entire team is ASE certified, ensuring expert, reliable service for all domestic and foreign vehicle makes.</p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="bg-slate-50 p-8 rounded-2xl shadow-sm hover:shadow-md transition border border-slate-100 group text-center">
+                        <div class="w-16 h-16 bg-yellow-100 text-yellow-600 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:scale-110 transition duration-300">
+                            <i class="fa-solid fa-calendar-check text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-3">Online Tracking</h3>
+                        <p class="text-slate-600 leading-relaxed">Book appointments 24/7 and track your car's repair status in real-time from your personal dashboard.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CALL TO ACTION STRIP -->
+        <section class="bg-slate-900 py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-3xl font-bold text-white mb-2">Ready to schedule your service?</h2>
+                    <p class="text-slate-400">Slots fill up fast. Book online to secure your time.</p>
+                </div>
+                <a href="booking.html" class="bg-white text-slate-900 font-bold py-3 px-8 rounded-lg hover:bg-slate-100 transition transform hover:-translate-y-1 shadow-xl">
+                    Book Appointment Now
+                </a>
+            </div>
+        </section
+
+        <section class="bg-white border-t border-slate-100 py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Site Map</h2>
+                    <p class="mt-3 text-slate-600">Access every page from here</p>
+                </div>
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <a href="index.html" class="block bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 font-medium text-slate-700 hover:border-brand-500 hover:text-brand-600 transition">Home</a>
+                    <a href="services.html" class="block bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 font-medium text-slate-700 hover:border-brand-500 hover:text-brand-600 transition">Services</a>
+                    <a href="contact.html" class="block bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 font-medium text-slate-700 hover:border-brand-500 hover:text-brand-600 transition">Contact</a>
+                    <a href="booking.html" class="block bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 font-medium text-slate-700 hover:border-brand-500 hover:text-brand-600 transition">Book Service</a>
+                    <a href="login.html" class="block bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 font-medium text-slate-700 hover:border-brand-500 hover:text-brand-600 transition">Client Login</a>
+                    <a href="register.html" class="block bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 font-medium text-slate-700 hover:border-brand-500 hover:text-brand-600 transition">Register</a>
+                    <a href="dashboard.html" class="block bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 font-medium text-slate-700 hover:border-brand-500 hover:text-brand-600 transition">Dashboard</a>
+                    <a href="admin-login.html" class="block bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 font-medium text-slate-700 hover:border-brand-500 hover:text-brand-600 transition">Staff Login</a>
+                    <a href="admin-panel.html" class="block bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 font-medium text-slate-700 hover:border-brand-500 hover:text-brand-600 transition">Admin Panel</a>
+                    <a href="404.html" class="block bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 font-medium text-slate-700 hover:border-brand-500 hover:text-brand-600 transition">404 Page</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-brand-900 text-white pt-16 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-slate-800 pb-12">
+                
+                <!-- Brand Info -->
+                <div>
+                    <div class="flex items-center mb-6">
+                        <div class="bg-brand-600 text-white p-1.5 rounded mr-3">
+                            <i class="fa-solid fa-wrench text-lg"></i>
+                        </div>
+                        <span class="font-bold text-2xl tracking-tight">Wrench & Gear</span>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                        Trusted mechanical repairs since 2010. We take pride in honest work, fair prices, and keeping your vehicle running safely for the long haul.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-slate-400 hover:text-white transition"><i class="fa-brands fa-facebook text-xl"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-white transition"><i class="fa-brands fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-slate-400 hover:text-white transition"><i class="fa-brands fa-twitter text-xl"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6 text-white">Quick Links</h4>
+                    <ul class="space-y-3 text-slate-400 text-sm">
+                        <li><a href="services.html" class="hover:text-brand-500 transition flex items-center"><i class="fa-solid fa-chevron-right text-xs mr-2"></i>Our Services</a></li>
+                        <li><a href="booking.html" class="hover:text-brand-500 transition flex items-center"><i class="fa-solid fa-chevron-right text-xs mr-2"></i>Book Appointment</a></li>
+                        <li><a href="dashboard.html" class="hover:text-brand-500 transition flex items-center"><i class="fa-solid fa-chevron-right text-xs mr-2"></i>Client Dashboard</a></li>
+                        <li><a href="admin-login.html" class="hover:text-brand-500 transition flex items-center"><i class="fa-solid fa-chevron-right text-xs mr-2"></i>Staff Login</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="font-bold text-lg mb-6 text-white">Contact & Hours</h4>
+                    <ul class="space-y-4 text-slate-400 text-sm">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-location-dot mt-1 mr-3 text-brand-500"></i>
+                            <span>123 Mechanic Ave, Suite 101<br>Auto City, CA 90001</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fa-solid fa-phone mr-3 text-brand-500"></i>
+                            <span>(555) 123-4567</span>
+                        </li>
+                        <li class="pt-4 border-t border-slate-800 mt-4">
+                            <div class="flex justify-between mb-1"><span>Mon - Fri:</span> <span class="text-white">8:00 AM - 6:00 PM</span></div>
+                            <div class="flex justify-between"><span>Saturday:</span> <span class="text-white">9:00 AM - 2:00 PM</span></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 text-center text-slate-600 text-sm">
+                &copy; 2025 Wrench & Gear Auto Services. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script src="js/main.js"></script> 
+    <script src="js/auth.js"></script> 
+</body>
+</html>

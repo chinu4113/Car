@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Wrench & Gear</title>
+    
+    <!-- Tailwind CSS and Global Links -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <script>
+        tailwind.config = {
+            theme: { extend: { fontFamily: { sans: ['Outfit', 'sans-serif'] }, colors: { brand: { 900: '#0f172a', 600: '#4f46e5', 500: '#6366f1' } } } }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen">
+    
+    <div id="toast-container"></div>
+
+    <!-- NOTE: Header replicated for structure -->
+    <header>
+        <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-20 items-center">
+                    <a href="index.html" class="flex items-center gap-3">
+                        <div class="bg-brand-600 text-white p-2 rounded-lg"><i class="fa-solid fa-wrench text-xl"></i></div>
+                        <span class="font-bold text-xl tracking-tight text-slate-900">Wrench & Gear</span>
+                    </a>
+                    <div class="hidden md:flex items-center space-x-8">
+                        <a href="index.html" class="text-slate-600 hover:text-brand-600 font-medium transition">Home</a>
+                        <a href="services.html" class="text-slate-600 hover:text-brand-600 font-medium transition">Services</a>
+                        <a href="contact.html" class="text-brand-600 font-medium transition">Contact</a>
+                        <div id="nav-guest" class="flex items-center space-x-4">
+                            <a href="login.html" class="text-slate-600 hover:text-brand-600 font-medium transition">Client Login</a>
+                            <a href="booking.html" class="bg-brand-900 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-slate-800 transition">Book Service</a>
+                        </div>
+                        <div id="nav-user" class="hidden items-center space-x-6">
+                            <a href="dashboard.html" class="flex items-center text-slate-700 hover:text-brand-600 font-medium">
+                                <img id="user-avatar" src="https://placehold.co/32x32/6366f1/ffffff?text=U" class="w-8 h-8 rounded-full mr-2">Dashboard
+                            </a>
+                            <button onclick="app.logout()" class="text-slate-400 hover:text-red-500 transition" title="Logout"><i class="fa-solid fa-right-from-bracket text-lg"></i></button>
+                        </div>
+                    </div>
+                    <button id="mobile-menu-button" class="md:hidden text-slate-600 focus:outline-none text-2xl"><i class="fa-solid fa-bars"></i></button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden"></div>
+        </nav>
+    </header>
+
+    <main class="flex-grow py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-slate-900">Get in Touch</h1>
+                <p class="mt-3 text-xl text-slate-600">We are ready to help you with all your auto needs.</p>
+            </div>
+
+            <!-- Layout adjusted to 2 columns, removing the need for a 3rd column that housed the map -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                
+                <!-- Contact Info Column (Now takes 1/2 width) -->
+                <div class="lg:col-span-1 space-y-8 bg-white p-8 rounded-2xl shadow-xl border border-slate-100 h-fit">
+                    <h2 class="text-2xl font-bold text-brand-900">Our Details</h2>
+                    
+                    <div class="flex items-start space-x-4">
+                        <i class="fa-solid fa-location-dot text-2xl text-brand-600 mt-1"></i>
+                        <div>
+                            <p class="font-semibold text-slate-800">Address</p>
+                            <p class="text-slate-600">123 Wrench Blvd, Suite 101<br>Auto City, CA 90001</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4">
+                        <i class="fa-solid fa-phone text-2xl text-brand-600 mt-1"></i>
+                        <div>
+                            <p class="font-semibold text-slate-800">Phone</p>
+                            <p class="text-slate-600">(555) 123-4567</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start space-x-4">
+                        <i class="fa-solid fa-envelope text-2xl text-brand-600 mt-1"></i>
+                        <div>
+                            <p class="font-semibold text-slate-800">Email</p>
+                            <p class="text-slate-600">service@wrenchandgear.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start space-x-4">
+                        <i class="fa-solid fa-clock text-2xl text-brand-600 mt-1"></i>
+                        <div>
+                            <p class="font-semibold text-slate-800">Hours</p>
+                            <p class="text-slate-600">Mon - Fri: 8:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 2:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form Column (Now takes 1/2 width) -->
+                <div class="lg:col-span-1">
+                    
+                    <!-- Contact Form -->
+                    <div class="bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
+                        <h2 class="text-2xl font-bold text-slate-900 mb-6">Send Us a Quick Message</h2>
+                        <form onsubmit="event.preventDefault(); app.notify('Message sent! We will reply via email soon.', 'success'); this.reset();" class="space-y-4">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <input type="text" placeholder="Your Name" required class="rounded-lg border-slate-300 border p-3 focus:ring-2 focus:ring-brand-500 outline-none">
+                                <input type="email" placeholder="Your Email" required class="rounded-lg border-slate-300 border p-3 focus:ring-2 focus:ring-brand-500 outline-none">
+                            </div>
+                            <input type="text" placeholder="Subject" required class="w-full rounded-lg border-slate-300 border p-3 focus:ring-2 focus:ring-brand-500 outline-none">
+                            <textarea rows="5" placeholder="Your Message or Repair Query..." required class="w-full rounded-lg border-slate-300 border p-3 focus:ring-2 focus:ring-brand-500 outline-none"></textarea>
+                            <button type="submit" class="bg-brand-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-brand-700 transition shadow-lg">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Placeholder for Footer -->
+    <footer class="bg-brand-900 text-white pt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="pt-8 text-center text-gray-500 text-sm">
+                &copy; 2023 Wrench & Gear Auto Services. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Car Service Booking — Services</title>
+  <meta name="description" content="Explore car maintenance and repair services. Book oil change, brake inspection, tire rotation, diagnostics and more.">
+  <link rel="stylesheet" href="./css/custom.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">Car Service Booking</a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a class="active" href="services.html">Services</a>
+      <a href="booking.html">Book</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="contact.html">Contact</a>
+      <a href="admin-login.html">Staff</a>
+    </nav>
+    <button class="menu-toggle" aria-label="Menu"></button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Our Services</h1>
+      <p>Quality maintenance and repairs by certified technicians. Choose a service and book in minutes.</p>
+    </section>
+
+    <section class="interactive-bar">
+      <div class="controls">
+        <input id="service-search" type="search" placeholder="Search services">
+        <div class="filters">
+          <button class="filter-btn active" data-filter="all" type="button">All</button>
+          <button class="filter-btn" data-filter="maintenance" type="button">Maintenance</button>
+          <button class="filter-btn" data-filter="repair" type="button">Repair</button>
+          <button class="filter-btn" data-filter="diagnostics" type="button">Diagnostics</button>
+          <button class="filter-btn" data-filter="detailing" type="button">Detailing</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="services-grid">
+      <article class="service-card" data-category="maintenance" data-key="oil-change">
+        <img src="https://via.placeholder.com/640x360?text=Oil+Change" alt="Oil change service">
+        <h2>Oil Change</h2>
+        <p>Premium synthetic or conventional oil with OEM filters.</p>
+        <div class="actions"><button class="details-btn" type="button">Details</button> <a class="cta" href="booking.html?service=oil-change">Book</a></div>
+      </article>
+
+      <article class="service-card" data-category="repair" data-key="brake-inspection">
+        <img src="https://via.placeholder.com/640x360?text=Brake+Inspection" alt="Brake inspection service">
+        <h2>Brake Inspection</h2>
+        <p>Pad and rotor checks, fluid top-up, and safety testing.</p>
+        <div class="actions"><button class="details-btn" type="button">Details</button> <a class="cta" href="booking.html?service=brake-inspection">Book</a></div>
+      </article>
+
+      <article class="service-card" data-category="maintenance" data-key="tire-rotation">
+        <img src="https://via.placeholder.com/640x360?text=Tire+Rotation" alt="Tire rotation service">
+        <h2>Tire Rotation</h2>
+        <p>Extend tire life and improve handling with proper rotation.</p>
+        <div class="actions"><button class="details-btn" type="button">Details</button> <a class="cta" href="booking.html?service=tire-rotation">Book</a></div>
+      </article>
+
+      <article class="service-card" data-category="diagnostics" data-key="engine-diagnostics">
+        <img src="https://via.placeholder.com/640x360?text=Diagnostics" alt="Engine diagnostics service">
+        <h2>Engine Diagnostics</h2>
+        <p>OBD-II scanning and performance analysis for quick fixes.</p>
+        <div class="actions"><button class="details-btn" type="button">Details</button> <a class="cta" href="booking.html?service=engine-diagnostics">Book</a></div>
+      </article>
+
+      <article class="service-card" data-category="repair" data-key="ac-service">
+        <img src="https://via.placeholder.com/640x360?text=AC+Service" alt="Air conditioning service">
+        <h2>AC Service</h2>
+        <p>Refill refrigerant, check compressor and cabin filters.</p>
+        <div class="actions"><button class="details-btn" type="button">Details</button> <a class="cta" href="booking.html?service=ac-service">Book</a></div>
+      </article>
+
+      <article class="service-card" data-category="repair" data-key="battery-replacement">
+        <img src="https://via.placeholder.com/640x360?text=Battery" alt="Battery replacement service">
+        <h2>Battery Replacement</h2>
+        <p>Load testing, replacement and electrical system checks.</p>
+        <div class="actions"><button class="details-btn" type="button">Details</button> <a class="cta" href="booking.html?service=battery-replacement">Book</a></div>
+      </article>
+
+      <article class="service-card" data-category="detailing" data-key="detailing">
+        <img src="https://via.placeholder.com/640x360?text=Detailing" alt="Car wash and detailing service">
+        <h2>Car Wash & Detailing</h2>
+        <p>Interior vacuuming, exterior polish, wax and shine.</p>
+        <div class="actions"><button class="details-btn" type="button">Details</button> <a class="cta" href="booking.html?service=detailing">Book</a></div>
+      </article>
+
+      <article class="service-card" data-category="maintenance" data-key="wheel-alignment">
+        <img src="https://via.placeholder.com/640x360?text=Alignment" alt="Wheel alignment service">
+        <h2>Wheel Alignment</h2>
+        <p>Four-wheel alignment for smooth and safe driving.</p>
+        <div class="actions"><button class="details-btn" type="button">Details</button> <a class="cta" href="booking.html?service=wheel-alignment">Book</a></div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 Car Service Booking</p>
+  </footer>
+
+  <script src="./js/main.js"></script>
+  <script src="./js/services.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Car Service Booking",
+    "image": "https://via.placeholder.com/640x360?text=Car+Service",
+    "priceRange": "$$",
+    "servesCuisine": "",
+    "areaServed": "Local",
+    "openingHours": "Mo-Sa 09:00-18:00"
+  }
+  </script>
+</body>
+</html>
